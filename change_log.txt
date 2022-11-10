@@ -1,0 +1,24 @@
+zip에서 수정한거
+1. 데코레이터 이용해서 함수 재사용성 증가시킴
+2. os.system('ctl')로 메뉴를 선택할 때 마다 출력된 문장들을 초기화 시킴 => python IDLE안됨, 명령창에서 실행(파일 더블클릭)하면 가능
+3. tictac.py랑 tictac_main.py합침
+4. 틱택토 2인 플레이에서 예외처리 오류 수정
+
+찐막에서 수정한거
+1. os.exit() => sys.exit()
+
+찐찐막에서 수정한거
+1. 모든 *_main.py에 메인 화면 선택지 추가
+2. 모든 *_main.py의 데코레이터 수정
+3. 오목 추가
+4. 게임 도중 로고가 보이게 수정
+5. printLogo()함수를 만들어 재사용성 증가시킴
+
+찐찐찐막에서 수정한거
+1. closeNumber_main.py catch 구문 case _: 추가 및 잡다한거 수정
+2. 모든 printLogo() 및 printLayout() 코드가 마지막에 엔터를 치도록 수정
+3. connect4_main.py 생성 및 main.py에 추가
+4. main.py case구문 print() 및 os.system('cls') 제거
+
+찐찐찐찐막에서 수정한거
+1. connect4_main.py 오류 수정
