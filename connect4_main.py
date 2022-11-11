@@ -1,9 +1,15 @@
 import os
 
+from platform   import system as system_name 
+
+def clear_screen(): 
+    command = 'cls' if system_name().lower().startswith('win') else 'clear'
+    os.system(command)
+    
 def choice(func):
     def wrapper():
         if func():
-            os.system('cls')
+            clear_screen()
             return 0
         ch = input('[1. 다시 시작] [2. 메인 메뉴로]\n선택지를 입력: ')
         while ch != '1' and ch != '2':
@@ -11,17 +17,17 @@ def choice(func):
             ch = input('[1. 다시 시작] [2. 메인 메뉴로]\n선택지를 입력: ')
         else:
             if ch == '1':
-                os.system('cls')
+                clear_screen()
                 @choice
                 def func1():
                     func()
                 return func1()
             else:
-                os.system('cls')
+                clear_screen()
     return wrapper
 
 def printLogo():
-    os.system('cls')
+    clear_screen()
     print("                                 _   _  _")
     print("  ___ ___  _ __  _ __   ___  ___| |_| || |")
     print(" / __/ _ ⧵| '_ ⧵| '_ ⧵ / _ ⧵/ __| __| || |_")
@@ -214,7 +220,7 @@ def connect4_main():
         player_mode = input("[1. 게임 플레이] [2. 메인 화면]\n선택지를 입력: ")
     else:
         if player_mode == "1":
-            os.system('cls')
+            clear_screen()
             connect4()
             return 0
         elif player_mode == "2":

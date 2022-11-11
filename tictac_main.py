@@ -2,12 +2,18 @@
 import os
 import random
 
-arr = [["*","*","*"],
-       ["*","*","*"],
-       ["*","*","*"]]
+from platform   import system as system_name 
+
+def clear_screen(): 
+    command = 'cls' if system_name().lower().startswith('win') else 'clear'
+    os.system(command)
+
+arr = [["a","b","c"],
+       ["d","e","f"],
+       ["g","h","i"]]
 
 def printLogo():
-    os.system('cls')
+    clear_screen()
     print(" _   _      _             _ ")
     print("| |_(_) ___| |_ ____  ___| |_ ____   ___ ")
     print("| __| |/ __| __/ _  |/ __| __/  _ ＼/ _ ＼")
@@ -83,7 +89,7 @@ def isFull():
     fcnt = 0
     for i in range(0, 3):
         for j in range(0, 3):
-            if arr[i][j] != "*":
+            if arr[i][j] in ['1', '2']:
                 fcnt += 1
     if fcnt == 9:
         return 1
@@ -100,27 +106,21 @@ def computer():
     arr[x][y] = 2
 
 def clear():
-    for i in range(0, 3):
-        for j in range(0, 3):
-            arr[i][j] = "*"
+    arr = [["a","b","c"],
+           ["d","e","f"],
+           ["g","h","i"]]
 
 def tictac_1p():
     while True:
         printLayout()
-        p = input("놓을 곳의 좌표를 i j형식으로 적으세요: ")
-        while True:
-            try:
-                x = int(p.split(" ")[0]) - 1
-                y = int(p.split(" ")[1]) - 1
-                while (arr[x][y] == 1 or arr[x][y] == 2):
-                    p = input("이미 1 또는 2가 있습니다. 놓을 곳의 좌표를 i j형식으로 적으세요: ")
-                    x = int(p.split(" ")[0]) - 1
-                    y = int(p.split(" ")[1]) - 1
-                break 
-            except BaseException:
-                p = input("오류: 숫자가 아니거나 범위를 벗어남, 다시 적어주세요: ")
-        x = int(p.split(" ")[0]) - 1
-        y = int(p.split(" ")[1]) - 1
+        p = input("놓을 곳의 좌표를 적으세요: ")
+        while not p in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']:
+            printLayout()
+            p = input("놓을 곳의 좌표를 다시 적으세요: ")
+        for j in range(3):
+            if p in arr[j]:
+                x = j
+                y = arr[j].index(p)
         arr[x][y] = 1
         computer()
         if isFull() and not isEnd():
@@ -140,20 +140,14 @@ def tictac_2p():
     while True:
         for i in range(0, 2):
             printLayout()
-            p = input(f"플레이어 {i + 1}, 놓을 곳의 좌표를 i j형식으로 적으세요: ")
-            while True:
-                try:
-                    x = int(p.split(" ")[0]) - 1
-                    y = int(p.split(" ")[1]) - 1
-                    while (arr[x][y] == 1 or arr[x][y] == 2):
-                        p = input("이미 1 또는 2가 있습니다. 놓을 곳의 좌표를 i j형식으로 적으세요: ")
-                        x = int(p.split(" ")[0]) - 1
-                        y = int(p.split(" ")[1]) - 1
-                    break 
-                except BaseException:
-                    p = input("오류: 숫자가 아니거나 범위를 벗어남, 다시 적어주세요: ")       
-            x = int(p.split(" ")[0]) - 1
-            y = int(p.split(" ")[1]) - 1
+            p = input("놓을 곳의 좌표를 적으세요: ")
+            while not p in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']:
+                printLayout()
+                p = input("놓을 곳의 좌표를 다시 적으세요: ")
+            for j in range(3):
+                if p in arr[j]:
+                    x = j
+                    y = arr[j].index(p)
             arr[x][y] = i + 1
             if isFull() and not isEnd():
                 printLayout()
@@ -171,7 +165,7 @@ def tictac_2p():
 def choice(func):
     def wrapper():
         if func():
-            os.system('cls')
+            clear_screen()
             return 0
         ch = input('[1. 다시 시작] [2. 메인 메뉴로]\n선택지를 입력: ')
         while ch != '1' and ch != '2':
@@ -179,13 +173,13 @@ def choice(func):
             ch = input('[1. 다시 시작] [2. 메인 메뉴로]\n선택지를 입력: ')
         else:
             if ch == '1':
-                os.system('cls')
+                clear_screen()
                 @choice
                 def func1():
                     func()
                 return func1()
             else:
-                os.system('cls')
+                clear_screen()
     return wrapper
 
 @choice

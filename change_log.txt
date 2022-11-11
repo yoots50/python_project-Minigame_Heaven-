@@ -22,3 +22,7 @@ zip에서 수정한거
 
 찐찐찐찐막에서 수정한거
 1. connect4_main.py 오류 수정
+
+찐찐찐찐찐막에서 수정한거
+1. mac os에서 os.system('cls')가 안되던거 수정
+2. tictac_1p, tictac_2p에서 좌표가 아닌 a~i를 선택하게 수정
