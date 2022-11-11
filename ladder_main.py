@@ -38,6 +38,7 @@ def printLayout(n, arr):
         print("")
     for i in range(n):
         print(f"{i + 1}", end = ' ')
+    print("")
 
 def printLogo():
     clear_screen()
@@ -105,28 +106,60 @@ def ladder():
                         break
             arr[y][i] = "-"
     printLayout(n, arr)
-    print('')
-    for i in range(0, 2 * n, 2):
-        x = i
-        y = 0
-        while True:
-            if x == 0:
-                if arr[y + 1][x + 1] == '-':
-                    x += 2
-                y += 1
-            elif x == 2 * n - 2:
-                if arr[y + 1][x - 1] == '-':
-                    x -= 2
-                y += 1
-            else:
-                if arr[y + 1][x - 1] == '-':
-                    x -= 2
-                elif arr[y + 1][x + 1] == '-':
-                    x += 2
-                y += 1
-            if y == 9:
-                print(f"{i // 2 + 1}의 목적지: {x // 2 + 1}")
-                break
-    
+    temp = []
+    done = False
+    while not done:
+        ch = input("모든 결과를 한번에 보시려면 0, 그렇지 않으면 원하는 결과의 숫자를 입력하세요: ")
+        while ch not in [str(i) for i in range(int(n + 1))]:
+            print("다시 입력하세요.")
+            ch = input("모든 결과를 한번에 보시려면 0, 그렇지 않으면 원하는 결과의 숫자를 입력하세요: ")
+        if ch == "0":
+            for i in range(0, 2 * n, 2):
+                x = i
+                y = 0
+                while True:
+                    if x == 0:
+                        if arr[y + 1][x + 1] == '-':
+                            x += 2
+                        y += 1
+                    elif x == 2 * n - 2:
+                        if arr[y + 1][x - 1] == '-':
+                            x -= 2
+                        y += 1
+                    else:
+                        if arr[y + 1][x - 1] == '-':
+                            x -= 2
+                        elif arr[y + 1][x + 1] == '-':
+                            x += 2
+                        y += 1
+                    if y == 9:
+                        print(f"{i // 2 + 1}의 목적지: {x // 2 + 1}")
+                        break
+            done = True
+        else:
+            x = (int(ch) - 1) * 2
+            y = 0
+            while True:
+                if x == 0:
+                    if arr[y + 1][x + 1] == '-':
+                        x += 2
+                    y += 1
+                elif x == 2 * n - 2:
+                    if arr[y + 1][x - 1] == '-':
+                        x -= 2
+                    y += 1
+                else:
+                    if arr[y + 1][x - 1] == '-':
+                        x -= 2
+                    elif arr[y + 1][x + 1] == '-':
+                        x += 2
+                    y += 1
+                if y == 9:
+                    print(f"{int(ch)}의 목적지: {x // 2 + 1}")
+                    break
+            temp.append(ch)
+            if temp == [str(i + 1) for i in range(int(n))]:
+                done = True
+            
 if __name__ == "__main__":
     ladder_main()
