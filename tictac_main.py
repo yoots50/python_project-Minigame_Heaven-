@@ -12,6 +12,10 @@ arr = [["a","b","c"],
        ["d","e","f"],
        ["g","h","i"]]
 
+origin = [["a","b","c"],
+          ["d","e","f"],
+          ["g","h","i"]]
+
 def printLogo():
     clear_screen()
     print(" _   _      _             _ ")
@@ -89,7 +93,7 @@ def isFull():
     fcnt = 0
     for i in range(0, 3):
         for j in range(0, 3):
-            if arr[i][j] in ['1', '2']:
+            if arr[i][j] in [1, 2]:
                 fcnt += 1
     if fcnt == 9:
         return 1
@@ -105,42 +109,17 @@ def computer():
             return 0
     arr[x][y] = 2
 
-def clear():
-    arr = [["a","b","c"],
-           ["d","e","f"],
-           ["g","h","i"]]
+def clear(arr):
+    for i in range(3):
+        for j in range(3):
+            arr[i][j] = origin[i][j]
 
 def tictac_1p():
     while True:
+        done = True
         printLayout()
         p = input("놓을 곳의 좌표를 적으세요: ")
-        while not p in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']:
-            printLayout()
-            p = input("놓을 곳의 좌표를 다시 적으세요: ")
-        for j in range(3):
-            if p in arr[j]:
-                x = j
-                y = arr[j].index(p)
-        arr[x][y] = 1
-        computer()
-        if isFull() and not isEnd():
-            printLayout()
-            print("무승부")
-            clear()
-            return 0
-        elif isEnd():
-            printLayout()
-            print(f"게임 끝 승자: {isEnd()}")
-            clear()
-            return 0
-        else:
-            pass
-
-def tictac_2p():
-    while True:
-        for i in range(0, 2):
-            printLayout()
-            p = input("놓을 곳의 좌표를 적으세요: ")
+        while done:
             while not p in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']:
                 printLayout()
                 p = input("놓을 곳의 좌표를 다시 적으세요: ")
@@ -148,16 +127,55 @@ def tictac_2p():
                 if p in arr[j]:
                     x = j
                     y = arr[j].index(p)
+            if not arr[x][y] in [1, 2]:
+                done = False
+            else:
+                printLayout()
+                p = input("이미 칸이 찼습니다. 다시 적으세요: ")
+        arr[x][y] = 1
+        computer()
+        if isFull() and not isEnd():
+            printLayout()
+            print("무승부")
+            clear(arr)
+            return 0
+        elif isEnd():
+            printLayout()
+            print(f"게임 끝 승자: {isEnd()}")
+            clear(arr)
+            return 0
+        else:
+            pass
+
+def tictac_2p():
+    while True:
+        for i in range(0, 2):
+            done = True
+            printLayout()
+            p = input("놓을 곳의 좌표를 적으세요: ")
+            while done:   
+                while not p in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']:
+                    printLayout()
+                    p = input("놓을 곳의 좌표를 다시 적으세요: ")
+                for j in range(3):
+                    if p in arr[j]:
+                        x = j
+                        y = arr[j].index(p)
+                if not arr[x][y] in [1, 2]:
+                    done = False
+                else:
+                    printLayout()
+                    p = input("이미 칸이 찼습니다. 다시 적으세요: ")
             arr[x][y] = i + 1
             if isFull() and not isEnd():
                 printLayout()
                 print("무승부")
-                clear()
+                clear(arr)
                 return 0
             elif isEnd():
                 printLayout()
                 print(f"게임 끝 승자: {isEnd()}")
-                clear()
+                clear(arr)
                 return 0
             else:
                 pass

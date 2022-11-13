@@ -109,10 +109,10 @@ def ladder():
     temp = []
     done = False
     while not done:
-        ch = input("모든 결과를 한번에 보시려면 0, 그렇지 않으면 원하는 결과의 숫자를 입력하세요: ")
-        while ch not in [str(i) for i in range(int(n + 1))]:
+        ch = input("모든 결과를 한번에 보시려면 0, 스킵하시려면 -1, 그렇지 않으면 원하는 결과의 숫자를 입력하세요: ")
+        while ch not in [str(i - 1) for i in range(int(n + 2))]:
             print("다시 입력하세요.")
-            ch = input("모든 결과를 한번에 보시려면 0, 그렇지 않으면 원하는 결과의 숫자를 입력하세요: ")
+            ch = input("모든 결과를 한번에 보시려면 0, 스킵하시려면 -1, 그렇지 않으면 원하는 결과의 숫자를 입력하세요: ")
         if ch == "0":
             for i in range(0, 2 * n, 2):
                 x = i
@@ -136,6 +136,8 @@ def ladder():
                         print(f"{i // 2 + 1}의 목적지: {x // 2 + 1}")
                         break
             done = True
+        elif ch == "-1":
+            return 0
         else:
             x = (int(ch) - 1) * 2
             y = 0

@@ -9,7 +9,9 @@ def clear_screen():
 
 def choice(func):
     def wrapper():
-        func()
+        if func():
+            clear_screen()
+            return 0
         ch = input('[1. 다시 시작] [2. 메인 메뉴로]\n선택지를 입력: ')
         while ch != '1' and ch != '2':
             print('다시 입력하세요.')
