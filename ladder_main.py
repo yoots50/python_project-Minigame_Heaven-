@@ -162,6 +162,7 @@ def ladder():
                     print(f"{int(ch)}의 목적지: {x // 2 + 1}")
                     break
             temp.append(ch)
+            temp.sort()
             if temp == [str(i + 1) for i in range(int(n))]:
                 done = True
             
