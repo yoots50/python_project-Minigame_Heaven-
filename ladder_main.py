@@ -1,8 +1,10 @@
+
 import random
 import os
 
+#아래의 출처에서 코드를 수정함
+#출처: https://stackoverflow.com/questions/22885780/python-clear-the-screen
 from platform   import system as system_name 
-
 def clear_screen(): 
     command = 'cls' if system_name().lower().startswith('win') else 'clear'
     os.system(command)

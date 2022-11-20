@@ -33,3 +33,6 @@ zip에서 수정한거
 2. br31 choice(func)수정
 3. tictac_1p(), tictac_2p()에서 이미 1또는 2가 있는 곳의 위치를 입력할시 예외처리 수정
 4. ladder()에서 -1을 입력하면 바로 choice(func)가 작동하도록 수정
+
+2022/11/21 수정사항
+1. main.py를 제외한 *.py 파일에 #아래의 출처에서 코드를 수정함, #출처: https://stackoverflow.com/questions/22885780/python-clear-the-screen 추가
